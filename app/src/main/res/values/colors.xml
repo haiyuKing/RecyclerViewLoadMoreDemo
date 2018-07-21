@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- *********************SwipeRefreshLayout进度条颜色********************* -->
+    <color name="swiperefresh_color_1">#5DB5F4</color>
+    <color name="swiperefresh_color_2">#4E93D7</color>
+    <color name="swiperefresh_color_3">#3689EE</color>
+    <color name="swiperefresh_color_4">#5588FF</color>
+
+    <!-- ************自定义WRecyclerview************ -->
+    <color name="wrecyclerview_footer_bg_color">#EDEFF1</color>
+    <color name="wrecyclerview_footer_hint_text_color">#70747E</color>
+    <color name="wrecyclerview_footer_loading_text_color">#ABB1BD</color>
+    <color name="wrecyclerview_divider_color">#eeeeee</color>
+</resources>

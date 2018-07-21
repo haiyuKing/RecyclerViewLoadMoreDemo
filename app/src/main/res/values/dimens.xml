@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ************自定义WRecyclerview************ -->
+    <dimen name="wrecyclerview_footer_margin">10dp</dimen>
+    <dimen name="wrecyclerview_footer_progressbar_WH">24dp</dimen>
+    <dimen name="wrecyclerview_footer_text_size">17sp</dimen>
+</resources>
