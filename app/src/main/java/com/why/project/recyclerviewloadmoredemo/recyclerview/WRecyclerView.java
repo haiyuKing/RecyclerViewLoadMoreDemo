@@ -42,7 +42,7 @@ public class WRecyclerView extends RecyclerView {
 	private boolean isPullRefresh = false;
 	
 	/**快速移动产生惯性的移动距离值（自定义的临界值）*/
-	private final static int FAST_MOVE_DY = 100;
+	private final static int FAST_MOVE_DY = 150;//原先是100
 	
 	/**recyclerView最后一个可见的item的下标值*/
 	private int lastVisibleItem = 0;
@@ -136,8 +136,8 @@ public class WRecyclerView extends RecyclerView {
                 
                 if(mEnablePullLoad){
 
-					//if(lastVisibleItem >= mTotalItemCount - 1) {【实现松开手指后才会加载，暂时有问题】
-					if(lastVisibleItem >= mTotalItemCount - 1 - 1 ) {//减去的1，代表的footView，再减去的1代表下标值（0开始）【实现滑动到底部自动加载】
+					if(lastVisibleItem >= mTotalItemCount - 1) {//【实现松开手指后才会加载，暂时有问题--貌似没有问题了】
+					//if(lastVisibleItem >= mTotalItemCount - 1 - 1 ) {//减去的1，代表的footView，再减去的1代表下标值（0开始）【实现滑动到底部自动加载】
 						if(dy > 0){//向下滑动
 							isShowFooter = true;
 							/*

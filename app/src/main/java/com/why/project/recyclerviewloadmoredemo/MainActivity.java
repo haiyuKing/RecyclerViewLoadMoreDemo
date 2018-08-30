@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private void onBefore() {
 		if(!swipe_container.isRefreshing()) {//实现当下拉刷新的时候，不需要显示加载对话框
+			Toast.makeText(mContext,"显示加载框",Toast.LENGTH_SHORT).show();
 			//showProgressDialog();//显示进度加载框
 		}
 	}
@@ -167,13 +168,14 @@ public class MainActivity extends AppCompatActivity {
 				showListFail("数据内容为空");
 			}
 		}catch (JSONException e) {
-			Toast.makeText(MainActivity.this,"服务器数据解析异常，请联系管理员！",Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext,"服务器数据解析异常，请联系管理员！",Toast.LENGTH_SHORT).show();
 		}catch (Exception e) {
-			Toast.makeText(MainActivity.this,"服务器数据解析异常，请联系管理员！",Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext,"服务器数据解析异常，请联系管理员！",Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	private void onAfter() {
+		Toast.makeText(mContext,"隐藏加载框",Toast.LENGTH_SHORT).show();
 		//dismissProgressDialog();//隐藏进度加载框
 
 		if(curPageIndex == 1){//如果首页数据为空或者小于每页展现的条数，则禁用上拉加载功能
@@ -210,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
 			//扩展：显示无数据占位图
 			switchNoDataVisible(true);
 		}else{
-			Toast.makeText(MainActivity.this,msg,Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -244,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
 					initListData();//更新列表项集合
 				} else {
 					//到达最后一页了
-					Toast.makeText(MainActivity.this,"我也是有底线滴",Toast.LENGTH_SHORT).show();
+					Toast.makeText(mContext,"我也是有底线滴",Toast.LENGTH_SHORT).show();
 					//隐藏正在加载的区域
 					stopRefreshAndLoading();
 				}
