@@ -22,6 +22,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -144,19 +145,18 @@ public class MainActivity extends AppCompatActivity {
 					JSONArray listArray = responseObj.getJSONArray("data");
 					if(listArray.length() > 0){//如果有筛选功能，则需要使用大于等于，如果没有，只是单纯的刷新，则使用大于即可【不过因为fail的情况下显示无数据区域，所以此处去掉==0的情况】
 						//计算总页数
-						totalPage = responseObj.getInt("total") % pageSize == 0 ? responseObj.getInt("total") / pageSize : responseObj.getInt("total") / pageSize + 1;//计算总页数
-						if(curPageIndex == 1){
-							listitemList.clear();//下拉刷新，需要清空集合，因为刷新的是第一页数据【解决下拉刷新后立刻上拉加载崩溃的bug,方案二】
-						}
-						switchNoDataVisible(false);//显示列表，隐藏暂无数据区域
+						int totalPage = responseObj.getInt("total") % pageSize == 0 ? responseObj.getInt("total") / pageSize : responseObj.getInt("total") / pageSize + 1;//计算总页数
+
+						ArrayList<NewsBean> listitemList_temp = new ArrayList<NewsBean>();
 						for(int i=0;i<listArray.length();i++){
 							JSONObject listItemObj = listArray.getJSONObject(i);
 
 							NewsBean newsBean = new NewsBean();
 							newsBean.setNewsId(listItemObj.getString("newsId"));
 							newsBean.setNewsTitle(listItemObj.getString("newsTitle"));
-							listitemList.add(newsBean);
+							listitemList_temp.add(newsBean);
 						}
+						showList(totalPage,listitemList_temp);
 					}else {
 						showListFail("数据内容为空");
 					}
@@ -174,6 +174,20 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
+	//显示列表
+	public void showList(int totalPage, List<NewsBean> mNewsBeanList){
+		this.totalPage = totalPage;
+		if(curPageIndex == 1){
+			listitemList.clear();//下拉刷新，需要清空集合，因为刷新的是第一页数据【解决下拉刷新后立刻上拉加载崩溃的bug,方案二】
+		}
+
+		if(mNewsBeanList != null && mNewsBeanList.size() > 0) {
+			switchNoDataVisible(false);//显示列表，隐藏暂无数据区域
+			for (NewsBean newsBean : mNewsBeanList) {
+				listitemList.add(newsBean);
+			}
+		}
+	}
 	private void onAfter() {
 		Toast.makeText(mContext,"隐藏加载框",Toast.LENGTH_SHORT).show();
 		//dismissProgressDialog();//隐藏进度加载框
@@ -204,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
 		//初始化监听事件
 		initEvents();
 	}
+
 
 	//获取列表数据失败
 	public void showListFail(String msg) {
